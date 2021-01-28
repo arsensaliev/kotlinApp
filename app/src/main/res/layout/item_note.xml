@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    tools:backgroundTint="@android:color/holo_purple"
     android:layout_marginStart="@dimen/card_view_margin"
     android:layout_marginTop="@dimen/card_view_margin"
     android:layout_marginEnd="@dimen/card_view_margin"
@@ -21,7 +22,7 @@
             android:layout_marginStart="@dimen/text_view_margin"
             android:layout_marginTop="@dimen/text_view_margin"
             android:layout_marginEnd="@dimen/text_view_margin"
-            android:textColor="@color/white"
+            android:textColor="@color/design_default_color_on_primary"
             tools:text="@string/item_note_title" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -29,7 +30,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
-            android:textColor="@color/white"
+            android:textColor="@color/design_default_color_on_primary"
             tools:text="@string/item_note_description" />
 
     </LinearLayout>

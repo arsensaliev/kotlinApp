@@ -7,27 +7,32 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.RecyclerView
 import arsensaliev.io.kotlinapp.R
+import arsensaliev.io.kotlinapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
     lateinit var adapter: MainAdapter
+    lateinit var ui: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        ui = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(ui.root)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
-        val mainRecyclerView = findViewById<RecyclerView>(R.id.recyclerView)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(ui.toolbar)
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         adapter = MainAdapter()
-        mainRecyclerView.adapter = adapter
-        viewModel.viewState().observe(this, Observer<MainViewState> {t ->
+        ui.recyclerView.adapter = adapter
+        viewModel.viewState().observe(this, Observer<MainViewState> { t ->
             t?.let {
                 adapter.notes = it.notes
             }
         })
+
+    }
+
+    fun createUser(const: String) {
 
     }
 }

@@ -3,4 +3,6 @@
     <string name="item_note_title">Geekbrains + Kotlin forever</string>
     <string name="item_note_description">Я Kotlin бы выучил только за то, что на нем разрабатывал Вортон!</string>
     <string name="toolbar_title">Notes</string>
+    <string name="activity_note_textinput_hint">Заголовок</string>
+    <string name="activity_note_edittext">Текст заметки</string>
 </resources>

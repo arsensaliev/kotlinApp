@@ -1,41 +1,50 @@
 package arsensaliev.io.kotlinapp.data.model
 
+import java.util.*
+
 object Repository {
-    val notes: List<Note> = listOf(
+    val notes: MutableList<Note> = mutableListOf(
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xfff06292.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.WHITE
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xff9575cd.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.BLUE
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xff64b5f6.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.GREEN
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xff4db6ac.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.PINK
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xffb2ff59.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.RED
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xffffeb3b.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.YELLOW
         ),
         Note(
-            "Моя первая заметка",
-            "Kotlin очень краткий, но при этом выразительный язык",
-            0xffff6e40.toInt()
+            id = UUID.randomUUID().toString(),
+            title = "Моя первая заметка",
+            note = "Kotlin очень краткий, но при этом выразительный язык",
+            color = Color.VIOLET
         )
     )
 
