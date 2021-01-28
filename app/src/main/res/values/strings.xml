@@ -5,4 +5,5 @@
     <string name="toolbar_title">Notes</string>
     <string name="activity_note_textinput_hint">Заголовок</string>
     <string name="activity_note_edittext">Текст заметки</string>
+    <string name="new_note_title">New Note</string>
 </resources>

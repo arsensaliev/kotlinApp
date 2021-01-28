@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import arsensaliev.io.kotlinapp.R
 import arsensaliev.io.kotlinapp.data.model.Note
 
-class MainAdapter : RecyclerView.Adapter<NoteViewHolder>() {
+class MainAdapter(private val onItemClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<NoteViewHolder>() {
+
     var notes: List<Note> = listOf()
         set(value) {
             field = value
@@ -20,7 +22,7 @@ class MainAdapter : RecyclerView.Adapter<NoteViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        holder.bind(notes[position])
+        holder.bind(notes[position], onItemClickListener)
     }
 
     override fun getItemCount() = notes.size

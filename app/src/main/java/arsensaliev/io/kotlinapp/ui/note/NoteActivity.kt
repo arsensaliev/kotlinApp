@@ -3,10 +3,13 @@ package arsensaliev.io.kotlinapp.ui.note
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import arsensaliev.io.kotlinapp.R
+import arsensaliev.io.kotlinapp.data.model.Color
 import arsensaliev.io.kotlinapp.data.model.Note
-import arsensaliev.io.kotlinapp.databinding.ActivityMainBinding
+import arsensaliev.io.kotlinapp.databinding.ActivityNoteBinding
+import arsensaliev.io.kotlinapp.ui.DATE_TIME_FORMAT
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,18 +25,22 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private var note: Note? = null
+    private lateinit var ui: ActivityNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_note)
+        ui = ActivityNoteBinding.inflate(layoutInflater)
+        setContentView(ui.root)
 
         note = intent.getParcelableExtra(EXTRA_NOTE)
-        setSupportActionBar(toolbar)
+        setSupportActionBar(ui.toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         supportActionBar?.title = if (note != null) {
-            SimpleDateFormat(DATE_TIME_FORMAT,
-                Locale.getDefault()).format(note!!.lastChanged)
+            SimpleDateFormat(
+                DATE_TIME_FORMAT,
+                Locale.getDefault()
+            ).format(note!!.lastChanged)
         } else {
             getString(R.string.new_note_title)
         }
@@ -42,24 +49,25 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private fun initView() {
-        if (note != null) {
-            titleEt.setText(note?.title ?: "")
-            bodyEt.setText(note?.note ?: "")
-            val color = when(note!!.color) {
-                Color.WHITE -> R.color.color_white
-                Color.VIOLET -> R.color.color_violet
-                Color.YELLOW -> R.color.color_yello
-                Color.RED -> R.color.color_red
-                Color.PINK -> R.color.color_pink
-                Color.GREEN -> R.color.color_green
-                Color.BLUE -> R.color.color_blue
-            }
+        ui.titleEt.setText(note?.title ?: "")
+        ui.bodyEt.setText(note?.note ?: "")
 
-            toolbar.setBackgroundColor(resources.getColor(color))
+        val color = when (note?.color) {
+            Color.WHITE -> R.color.color_white
+            Color.VIOLET -> R.color.color_violet
+            Color.YELLOW -> R.color.color_yello
+            Color.RED -> R.color.color_red
+            Color.PINK -> R.color.color_pink
+            Color.GREEN -> R.color.color_green
+            Color.BLUE -> R.color.color_blue
+            else -> R.color.color_white
         }
+
+        ui.toolbar.setBackgroundColor(resources.getColor(color))
+
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean = when(item.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
         android.R.id.home -> {
             onBackPressed()
             true

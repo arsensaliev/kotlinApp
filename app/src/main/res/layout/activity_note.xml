@@ -31,13 +31,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/activity_note_textinput_hint"
-            android:textColorHint="@color/design_default_color_on_secondary">
+            android:textColorHint="@android:color/black">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/titleEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/design_default_color_on_primary" />
+                android:backgroundTint="@android:color/white"
+                android:textColor="@android:color/black" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputEditText

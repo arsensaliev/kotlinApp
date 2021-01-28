@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/toolbar_title"
-            app:titleTextColor="@color/design_default_color_on_primary" />
+            app:titleTextColor="@color/color_black"
+            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

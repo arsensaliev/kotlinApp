@@ -2,12 +2,10 @@ package arsensaliev.io.kotlinapp.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.RecyclerView
-import arsensaliev.io.kotlinapp.R
+import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityMainBinding
+import arsensaliev.io.kotlinapp.ui.note.NoteActivity
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
@@ -22,17 +20,22 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(ui.toolbar)
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        adapter = MainAdapter()
-        ui.recyclerView.adapter = adapter
-        viewModel.viewState().observe(this, Observer<MainViewState> { t ->
-            t?.let {
-                adapter.notes = it.notes
+
+        adapter = MainAdapter(object : OnItemClickListener {
+            override fun onItemClick(note: Note) {
+                openNoteScreen(note)
             }
+        })
+
+        ui.recyclerView.adapter = adapter
+
+        viewModel.viewState().observe(this, {
+            it?.let { adapter.notes = it.notes }
         })
 
     }
 
-    fun createUser(const: String) {
-
+    fun openNoteScreen(note: Note) {
+        startActivity(NoteActivity.getStartIntent(this, note))
     }
 }
