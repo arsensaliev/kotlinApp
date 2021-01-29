@@ -3,13 +3,20 @@ package arsensaliev.io.kotlinapp.ui.note
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProviders
 import arsensaliev.io.kotlinapp.R
 import arsensaliev.io.kotlinapp.data.model.Color
 import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityNoteBinding
 import arsensaliev.io.kotlinapp.ui.DATE_TIME_FORMAT
+import arsensaliev.io.kotlinapp.ui.SAVE_DELAY
+import arsensaliev.io.kotlinapp.viewmodel.NoteViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,12 +32,24 @@ class NoteActivity : AppCompatActivity() {
     }
 
     private var note: Note? = null
+    private lateinit var viewModel: NoteViewModel
     private lateinit var ui: ActivityNoteBinding
+
+    private val textChangeListener = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            triggerSaveNote()
+        }
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable?) {}
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ui = ActivityNoteBinding.inflate(layoutInflater)
         setContentView(ui.root)
+
+        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
 
         note = intent.getParcelableExtra(EXTRA_NOTE)
         setSupportActionBar(ui.toolbar)
@@ -64,6 +83,8 @@ class NoteActivity : AppCompatActivity() {
         }
 
         ui.toolbar.setBackgroundColor(resources.getColor(color))
+        ui.titleEt.addTextChangedListener(textChangeListener)
+        ui.bodyEt.addTextChangedListener(textChangeListener)
 
     }
 
@@ -75,5 +96,29 @@ class NoteActivity : AppCompatActivity() {
         else -> super.onOptionsItemSelected(item)
     }
 
+    private fun createNewNote(): Note =
+        Note(
+            id = UUID.randomUUID().toString(),
+            title = ui.titleEt.text.toString(),
+            note = ui.bodyEt.text.toString()
+        )
+
+    private fun triggerSaveNote() {
+        if (ui.titleEt.text == null || ui.titleEt.text!!.length < 3) return
+
+        Handler(Looper.getMainLooper()).postDelayed({
+            note = note?.copy(
+                title = ui.titleEt.text.toString(),
+                note = ui.bodyEt.text.toString(),
+                lastChanged = Date()
+            ) ?: createNewNote()
+
+            note?.let { note ->
+                viewModel.saveChanges(note)
+            }
+        }, SAVE_DELAY)
+
+
+    }
 
 }

@@ -1,4 +1,4 @@
-package arsensaliev.io.kotlinapp.ui.main
+package arsensaliev.io.kotlinapp.ui.main.recyclerView
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -6,6 +6,7 @@ import arsensaliev.io.kotlinapp.R
 import arsensaliev.io.kotlinapp.data.model.Color
 import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ItemNoteBinding
+import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
 
 class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val ui: ItemNoteBinding = ItemNoteBinding.bind(itemView)
@@ -24,7 +25,7 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             Color.BLUE -> R.color.color_blue
         }
 
-        itemView.setBackgroundResource(color)
+        itemView.setBackgroundColor(itemView.context.resources.getColor(color))
         itemView.setOnClickListener { onItemClickListener.onItemClick(note) }
     }
 }

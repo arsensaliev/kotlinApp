@@ -20,10 +20,6 @@ data class Note(
         other as Note
 
         if (id != other.id) return false
-        if (title != other.title) return false
-        if (note != other.note) return false
-        if (color != other.color) return false
-        if (lastChanged != other.lastChanged) return false
 
         return true
     }

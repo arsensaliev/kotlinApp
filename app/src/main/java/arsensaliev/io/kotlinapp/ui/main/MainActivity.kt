@@ -5,7 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityMainBinding
+import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
+import arsensaliev.io.kotlinapp.ui.main.recyclerView.MainAdapter
 import arsensaliev.io.kotlinapp.ui.note.NoteActivity
+import arsensaliev.io.kotlinapp.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     lateinit var viewModel: MainViewModel
@@ -33,9 +36,12 @@ class MainActivity : AppCompatActivity() {
             it?.let { adapter.notes = it.notes }
         })
 
+        ui.fab.setOnClickListener {
+            openNoteScreen()
+        }
     }
 
-    fun openNoteScreen(note: Note) {
+    fun openNoteScreen(note: Note? = null) {
         startActivity(NoteActivity.getStartIntent(this, note))
     }
 }
