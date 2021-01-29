@@ -8,6 +8,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
+// Нихера не понимаю как она работает, но главное она работает
 class FABBehavior(context: Context, attributeSet: AttributeSet) :
     FloatingActionButton.Behavior(context, attributeSet) {
 

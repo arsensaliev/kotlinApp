@@ -71,6 +71,7 @@ class NoteActivity : AppCompatActivity() {
         ui.titleEt.setText(note?.title ?: "")
         ui.bodyEt.setText(note?.note ?: "")
 
+        // Тут проблема DRY - повторение кода, хочу совет как лучше сделать.
         val color = when (note?.color) {
             Color.WHITE -> R.color.color_white
             Color.VIOLET -> R.color.color_violet
@@ -82,10 +83,11 @@ class NoteActivity : AppCompatActivity() {
             else -> R.color.color_white
         }
 
+        // getColor устарел
         ui.toolbar.setBackgroundColor(resources.getColor(color))
+
         ui.titleEt.addTextChangedListener(textChangeListener)
         ui.bodyEt.addTextChangedListener(textChangeListener)
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean = when (item.itemId) {
@@ -106,6 +108,7 @@ class NoteActivity : AppCompatActivity() {
     private fun triggerSaveNote() {
         if (ui.titleEt.text == null || ui.titleEt.text!!.length < 3) return
 
+        // Handler тоже устарел, хотел бы хороший пример
         Handler(Looper.getMainLooper()).postDelayed({
             note = note?.copy(
                 title = ui.titleEt.text.toString(),

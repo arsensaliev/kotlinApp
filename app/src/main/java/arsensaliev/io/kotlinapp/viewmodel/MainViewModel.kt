@@ -10,6 +10,7 @@ class MainViewModel : ViewModel() {
     private val viewStateLiveData: MutableLiveData<MainViewState> = MutableLiveData()
 
     init {
+        // Так и не понял разнице observe и observeForever и зачем мы тут используем метод copy ?
         Repository.getNotes().observeForever { notes ->
             viewStateLiveData.value =
                 viewStateLiveData.value?.copy(notes = notes) ?: MainViewState(notes)

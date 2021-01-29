@@ -10,7 +10,9 @@ import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
 class MainAdapter(private val onItemClickListener: OnItemClickListener) :
     RecyclerView.Adapter<NoteViewHolder>() {
 
+
     var notes: List<Note> = listOf()
+        // Думаю сеттер не должна какие либо действия делать кроме как установить значение
         set(value) {
             field = value
             notifyDataSetChanged()

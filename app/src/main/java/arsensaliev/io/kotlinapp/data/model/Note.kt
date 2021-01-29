@@ -34,6 +34,7 @@ data class Note(
     }
 }
 
+// Цвета лучше создать в отдельный файл, но в какой именно папке хз
 enum class Color {
     WHITE,
     YELLOW,

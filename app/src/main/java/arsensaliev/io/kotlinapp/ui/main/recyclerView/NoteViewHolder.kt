@@ -15,6 +15,7 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         ui.title.text = note.title
         ui.body.text = note.note
 
+        // Тут проблема DRY - повторение кода, хочу совет как лучше сделать.
         val color = when (note.color) {
             Color.WHITE -> R.color.color_white
             Color.VIOLET -> R.color.color_violet
@@ -25,6 +26,9 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
             Color.BLUE -> R.color.color_blue
         }
 
+        // GetColor устарел, что можно сделать ?
+        // Прошу не показывать пример с устаревшим кодом
+        // Давайте учиться сразу хорошему)) P.S Лучшая цитата Егора)
         itemView.setBackgroundColor(itemView.context.resources.getColor(color))
         itemView.setOnClickListener { onItemClickListener.onItemClick(note) }
     }
