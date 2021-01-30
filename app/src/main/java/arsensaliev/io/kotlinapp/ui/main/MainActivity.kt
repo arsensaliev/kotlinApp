@@ -19,12 +19,10 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
 
     lateinit var adapter: MainAdapter
 
-    override lateinit var ui: ActivityMainBinding
+    override val ui: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        ui = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(ui.root)
 
         setSupportActionBar(ui.toolbar)
 

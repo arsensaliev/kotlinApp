@@ -36,7 +36,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
         ViewModelProviders.of(this).get(NoteViewModel::class.java)
     }
 
-    override lateinit var ui: ActivityNoteBinding
+    override val ui: ActivityNoteBinding by lazy { ActivityNoteBinding.inflate(layoutInflater) }
 
     private var note: Note? = null
 
@@ -51,10 +51,6 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        ui = ActivityNoteBinding.inflate(layoutInflater)
-
-        setContentView(ui.root)
 
         val noteId = intent.getStringExtra(EXTRA_NOTE)
 
