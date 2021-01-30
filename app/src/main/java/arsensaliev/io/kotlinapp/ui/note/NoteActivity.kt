@@ -8,7 +8,6 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import arsensaliev.io.kotlinapp.R
 import arsensaliev.io.kotlinapp.data.model.Color
@@ -16,24 +15,30 @@ import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityNoteBinding
 import arsensaliev.io.kotlinapp.ui.DATE_TIME_FORMAT
 import arsensaliev.io.kotlinapp.ui.SAVE_DELAY
-import arsensaliev.io.kotlinapp.viewmodel.NoteViewModel
+import arsensaliev.io.kotlinapp.ui.base.BaseActivity
+import arsensaliev.io.kotlinapp.ui.note.state.NoteViewState
+import arsensaliev.io.kotlinapp.viewmodel.note.NoteViewModel
 import java.text.SimpleDateFormat
 import java.util.*
 
-class NoteActivity : AppCompatActivity() {
+class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     companion object {
         private val EXTRA_NOTE = NoteActivity::class.java.name + "extra.NOTE"
 
-        fun getStartIntent(context: Context, note: Note?): Intent {
+        fun getStartIntent(context: Context, noteId: String?): Intent {
             val intent = Intent(context, NoteActivity::class.java)
-            intent.putExtra(EXTRA_NOTE, note)
+            intent.putExtra(EXTRA_NOTE, noteId)
             return intent
         }
     }
 
+    override val viewModel: NoteViewModel by lazy {
+        ViewModelProviders.of(this).get(NoteViewModel::class.java)
+    }
+
+    override lateinit var ui: ActivityNoteBinding
+
     private var note: Note? = null
-    private lateinit var viewModel: NoteViewModel
-    private lateinit var ui: ActivityNoteBinding
 
     private val textChangeListener = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -46,13 +51,19 @@ class NoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         ui = ActivityNoteBinding.inflate(layoutInflater)
+
         setContentView(ui.root)
 
-        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
+        val noteId = intent.getStringExtra(EXTRA_NOTE)
 
-        note = intent.getParcelableExtra(EXTRA_NOTE)
+        noteId?.let {
+            viewModel.loadNote(it)
+        }
+
         setSupportActionBar(ui.toolbar)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         supportActionBar?.title = if (note != null) {
@@ -80,7 +91,7 @@ class NoteActivity : AppCompatActivity() {
             Color.PINK -> R.color.color_pink
             Color.GREEN -> R.color.color_green
             Color.BLUE -> R.color.color_blue
-            else -> R.color.color_white
+            else -> R.color.color_violet
         }
 
         // getColor устарел
@@ -122,6 +133,11 @@ class NoteActivity : AppCompatActivity() {
         }, SAVE_DELAY)
 
 
+    }
+
+    override fun renderData(data: Note?) {
+        this.note = data
+        initView()
     }
 
 }
