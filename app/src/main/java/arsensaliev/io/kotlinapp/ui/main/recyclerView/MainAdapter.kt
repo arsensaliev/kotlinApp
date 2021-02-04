@@ -12,7 +12,6 @@ class MainAdapter(private val onItemClickListener: OnItemClickListener) :
 
 
     var notes: List<Note> = listOf()
-        // Думаю сеттер не должна какие либо действия делать кроме как установить значение
         set(value) {
             field = value
             notifyDataSetChanged()

@@ -10,16 +10,16 @@ import android.text.TextWatcher
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProviders
 import arsensaliev.io.kotlinapp.R
-import arsensaliev.io.kotlinapp.data.model.Color
 import arsensaliev.io.kotlinapp.data.model.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityNoteBinding
-import arsensaliev.io.kotlinapp.ui.DATE_TIME_FORMAT
-import arsensaliev.io.kotlinapp.ui.SAVE_DELAY
 import arsensaliev.io.kotlinapp.ui.base.BaseActivity
+import arsensaliev.io.kotlinapp.ui.format
+import arsensaliev.io.kotlinapp.ui.getColorInt
 import arsensaliev.io.kotlinapp.ui.note.state.NoteViewState
 import arsensaliev.io.kotlinapp.viewmodel.note.NoteViewModel
-import java.text.SimpleDateFormat
 import java.util.*
+
+const val SAVE_DELAY = 2000L
 
 class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     companion object {
@@ -51,47 +51,28 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val noteId = intent.getStringExtra(EXTRA_NOTE)
-
-        noteId?.let {
-            viewModel.loadNote(it)
-        }
-
         setSupportActionBar(ui.toolbar)
 
+        val noteId = intent.getStringExtra(EXTRA_NOTE)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        supportActionBar?.title = if (note != null) {
-            SimpleDateFormat(
-                DATE_TIME_FORMAT,
-                Locale.getDefault()
-            ).format(note!!.lastChanged)
-        } else {
-            getString(R.string.new_note_title)
+        noteId?.let {
+            viewModel.loadNote(it)
+        } ?: run {
+            supportActionBar?.title = getString(R.string.new_note_title)
         }
 
         initView()
     }
 
     private fun initView() {
-        ui.titleEt.setText(note?.title ?: "")
-        ui.bodyEt.setText(note?.note ?: "")
+        note?.run {
+            ui.toolbar.setBackgroundColor(color.getColorInt(this@NoteActivity))
+            ui.titleEt.setText(title)
+            ui.bodyEt.setText(note)
 
-        // Тут проблема DRY - повторение кода, хочу совет как лучше сделать.
-        val color = when (note?.color) {
-            Color.WHITE -> R.color.color_white
-            Color.VIOLET -> R.color.color_violet
-            Color.YELLOW -> R.color.color_yello
-            Color.RED -> R.color.color_red
-            Color.PINK -> R.color.color_pink
-            Color.GREEN -> R.color.color_green
-            Color.BLUE -> R.color.color_blue
-            else -> R.color.color_violet
+            supportActionBar?.title = lastChanged.format()
         }
 
-        // getColor устарел
-        ui.toolbar.setBackgroundColor(resources.getColor(color))
 
         ui.titleEt.addTextChangedListener(textChangeListener)
         ui.bodyEt.addTextChangedListener(textChangeListener)
@@ -115,7 +96,6 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     private fun triggerSaveNote() {
         if (ui.titleEt.text == null || ui.titleEt.text!!.length < 3) return
 
-        // Handler тоже устарел, хотел бы хороший пример
         Handler(Looper.getMainLooper()).postDelayed({
             note = note?.copy(
                 title = ui.titleEt.text.toString(),
