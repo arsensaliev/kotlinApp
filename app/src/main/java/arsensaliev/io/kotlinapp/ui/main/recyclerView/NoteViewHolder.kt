@@ -3,8 +3,8 @@ package arsensaliev.io.kotlinapp.ui.main.recyclerView
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import arsensaliev.io.kotlinapp.R
-import arsensaliev.io.kotlinapp.data.model.Color
-import arsensaliev.io.kotlinapp.data.model.Note
+import arsensaliev.io.kotlinapp.data.model.note.Color
+import arsensaliev.io.kotlinapp.data.model.note.Note
 import arsensaliev.io.kotlinapp.databinding.ItemNoteBinding
 import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
 

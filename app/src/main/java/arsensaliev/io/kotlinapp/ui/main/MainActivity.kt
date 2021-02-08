@@ -1,8 +1,10 @@
 package arsensaliev.io.kotlinapp.ui.main
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.ViewModelProviders
-import arsensaliev.io.kotlinapp.data.model.Note
+import androidx.lifecycle.ViewModelProvider
+import arsensaliev.io.kotlinapp.data.model.note.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityMainBinding
 import arsensaliev.io.kotlinapp.ui.base.BaseActivity
 import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
@@ -14,12 +16,12 @@ import arsensaliev.io.kotlinapp.viewmodel.main.MainViewModel
 class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
 
     override val viewModel: MainViewModel by lazy {
-        ViewModelProviders.of(this).get(MainViewModel::class.java)
+        ViewModelProvider(this).get(MainViewModel::class.java)
     }
 
-    lateinit var adapter: MainAdapter
-
     override val ui: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
+
+    lateinit var adapter: MainAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,4 +49,8 @@ class MainActivity : BaseActivity<List<Note>?, MainViewState>() {
         adapter.notes = data
     }
 
+
+    companion object {
+        fun getStartIntent(context: Context) = Intent(context, MainActivity::class.java)
+    }
 }

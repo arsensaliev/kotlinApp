@@ -1,4 +1,4 @@
-package arsensaliev.io.kotlinapp.data.model
+package arsensaliev.io.kotlinapp.data.model.note
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

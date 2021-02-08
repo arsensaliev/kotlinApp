@@ -2,8 +2,8 @@ package arsensaliev.io.kotlinapp.viewmodel.main
 
 import androidx.lifecycle.Observer
 import arsensaliev.io.kotlinapp.data.Repository
-import arsensaliev.io.kotlinapp.data.model.Note
-import arsensaliev.io.kotlinapp.data.model.NoteResult
+import arsensaliev.io.kotlinapp.data.model.note.Note
+import arsensaliev.io.kotlinapp.data.model.note.NoteResult
 import arsensaliev.io.kotlinapp.ui.main.state.MainViewState
 import arsensaliev.io.kotlinapp.viewmodel.base.BaseViewModel
 

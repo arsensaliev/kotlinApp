@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import arsensaliev.io.kotlinapp.R
-import arsensaliev.io.kotlinapp.data.model.Note
+import arsensaliev.io.kotlinapp.data.model.note.Note
 import arsensaliev.io.kotlinapp.ui.main.interfaces.OnItemClickListener
 
 class MainAdapter(private val onItemClickListener: OnItemClickListener) :

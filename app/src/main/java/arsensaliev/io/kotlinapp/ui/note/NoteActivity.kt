@@ -8,9 +8,9 @@ import android.os.Looper
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.MenuItem
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import arsensaliev.io.kotlinapp.R
-import arsensaliev.io.kotlinapp.data.model.Note
+import arsensaliev.io.kotlinapp.data.model.note.Note
 import arsensaliev.io.kotlinapp.databinding.ActivityNoteBinding
 import arsensaliev.io.kotlinapp.ui.base.BaseActivity
 import arsensaliev.io.kotlinapp.ui.format
@@ -33,7 +33,7 @@ class NoteActivity : BaseActivity<Note?, NoteViewState>() {
     }
 
     override val viewModel: NoteViewModel by lazy {
-        ViewModelProviders.of(this).get(NoteViewModel::class.java)
+        ViewModelProvider(this).get(NoteViewModel::class.java)
     }
 
     override val ui: ActivityNoteBinding by lazy { ActivityNoteBinding.inflate(layoutInflater) }

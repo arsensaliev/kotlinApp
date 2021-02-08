@@ -1,6 +1,6 @@
 package arsensaliev.io.kotlinapp.data
 
-import arsensaliev.io.kotlinapp.data.model.Note
+import arsensaliev.io.kotlinapp.data.model.note.Note
 import arsensaliev.io.kotlinapp.data.provider.FireStoreProvider
 import arsensaliev.io.kotlinapp.data.provider.RemoteDataProvider
 
@@ -13,4 +13,6 @@ object Repository {
     fun saveNote(note: Note) = remoteDataProvider.saveNote(note)
 
     fun getNoteById(id: String) = remoteDataProvider.getNoteById(id)
+
+    fun getCurrentUser() = remoteDataProvider.getCurrentUser()
 }

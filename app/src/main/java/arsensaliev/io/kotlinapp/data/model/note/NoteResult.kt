@@ -1,4 +1,4 @@
-package arsensaliev.io.kotlinapp.data.model
+package arsensaliev.io.kotlinapp.data.model.note
 
 sealed class NoteResult {
 

@@ -3,7 +3,7 @@ package arsensaliev.io.kotlinapp.ui
 import android.content.Context
 import androidx.core.content.ContextCompat
 import arsensaliev.io.kotlinapp.R
-import arsensaliev.io.kotlinapp.data.model.Color
+import arsensaliev.io.kotlinapp.data.model.note.Color
 import java.text.SimpleDateFormat
 import java.util.*
 
