@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "862171017522",
-    "project_id": "mynote-dc18d",
-    "storage_bucket": "mynote-dc18d.appspot.com"
+    "project_number": "886599475941",
+    "project_id": "noteapp-45212",
+    "storage_bucket": "noteapp-45212.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:862171017522:android:424bad9b73899105eca72b",
+        "mobilesdk_app_id": "1:886599475941:android:7cb1b570c24f584d832a0c",
         "android_client_info": {
           "package_name": "arsensaliev.io.kotlinapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "862171017522-6buknhp7p8m2bvfrbb2jokk807f73e8c.apps.googleusercontent.com",
+          "client_id": "886599475941-61nm5j3sgjbs9mnca5021a9nt0ou7tif.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "arsensaliev.io.kotlinapp",
+            "certificate_hash": "1d7616eab444cb4ca611ce5e04974340203961ee"
+          }
+        },
+        {
+          "client_id": "886599475941-9c23j0s44drscnn2fvaqubatrk7h7r3r.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvli4Tupp7ZEgoW9XxLBABPy-uqZBNhCc"
+          "current_key": "AIzaSyCiG6LYY02tEVvn3njkpJL037Soiz9PuRI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "862171017522-6buknhp7p8m2bvfrbb2jokk807f73e8c.apps.googleusercontent.com",
+              "client_id": "886599475941-9c23j0s44drscnn2fvaqubatrk7h7r3r.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

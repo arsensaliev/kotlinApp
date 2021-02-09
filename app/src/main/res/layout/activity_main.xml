@@ -19,7 +19,7 @@
             app:layout_scrollFlags="scroll|enterAlways"
             app:title="@string/toolbar_title"
             app:titleTextColor="@color/color_black"
-            android:theme="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+            android:theme="@style/Theme.MaterialComponents.Light"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

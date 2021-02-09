@@ -26,7 +26,7 @@ class FireStoreProvider : RemoteDataProvider {
         MutableLiveData<NoteResult>().apply {
             try {
                 getUserNotesCollection().addSnapshotListener { snapshot, error ->
-                    value = error?.let { NoteResult.Error(it) }
+                    value = error?.let { throw it }
                         ?: snapshot?.let { res ->
                             val notes = res.documents.map { document ->
                                 document.toObject(Note::class.java)
@@ -48,7 +48,7 @@ class FireStoreProvider : RemoteDataProvider {
                         value = NoteResult.Success(res.toObject(Note::class.java))
                     }
                     .addOnFailureListener { err ->
-                        value = NoteResult.Error(err)
+                        throw err
                     }
             } catch (e: Throwable) {
                 value = NoteResult.Error(e)
@@ -67,7 +67,7 @@ class FireStoreProvider : RemoteDataProvider {
                     }
                     .addOnFailureListener { err ->
                         Log.d(TAG, "Error saving $note message ${err.message}")
-                        value = NoteResult.Error(err)
+                        throw err
                     }
             } catch (e: Throwable) {
                 value = NoteResult.Error(e)
