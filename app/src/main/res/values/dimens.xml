@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="card_view_margin">4dp</dimen>
+    <dimen name="text_view_margin">8dp</dimen>
+    <dimen name="activity_note_container_padding">16dp</dimen>
+    <dimen name="padding_default">10dp</dimen>
+</resources>
