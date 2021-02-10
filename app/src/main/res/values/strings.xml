@@ -12,4 +12,6 @@
     <string name="logout_dialog_cancel">Отмена</string>
     <string name="ok_bth_title">ok</string>
     <string name="logout_menu_title">Выйти</string>
+    <string name="change_color_menu_title">Цвет</string>
+    <string name="delete_menu_title">Удалить</string>
 </resources>
